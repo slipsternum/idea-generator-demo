@@ -46,14 +46,16 @@ project — otherwise you paste it in manually.
 | Setting | backend | web-ui |
 |---------|---------|--------|
 | **Root Directory** | `backend` | `web-ui` |
-| **Framework Preset** | Other | Vite (auto) |
+| **Framework Preset** | FastAPI (pinned in `backend/vercel.json`) | Vite (auto) |
 | **Build Command** | *(none/default)* | `npm run build` (auto) |
 | **Output Directory** | *(default)* | `dist` (auto) |
 | **Install Command** | *(default)* | `npm install` (auto) |
 
-The backend is zero-config: Vercel's Python runtime finds the `FastAPI` app named
-`app` in `main.py`. `backend/vercel.json` sets the function timeout (60s, for the LLM
-call). `web-ui/vercel.json` adds the SPA rewrite so deep links like `/idea/<id>` work.
+The backend uses Vercel's FastAPI preset, pinned with `"framework": "fastapi"` in
+`backend/vercel.json` so it doesn't depend on auto-detection (that file overrides the
+dashboard setting). The preset finds the `FastAPI` app named `app` in `main.py`; the
+same file sets the function timeout (60s, for the LLM call). `web-ui/vercel.json` adds
+the SPA rewrite so deep links like `/idea/<id>` work.
 
 ## Environment variables — who needs what
 
